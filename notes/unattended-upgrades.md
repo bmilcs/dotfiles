@@ -37,7 +37,7 @@ APT::Periodic::AutocleanInterval "7";
 // APT::Periodic::Verbose "2";
 ```
 
-### `sudo editor /etc/apt/apt.conf.d/50unattended-upgrades`
+### `sudo vi /etc/apt/apt.conf.d/50unattended-upgrades`
 
 ```sh
 Unattended-Upgrade::Origins-Pattern {
@@ -45,18 +45,26 @@ Unattended-Upgrade::Origins-Pattern {
   "${distro_id} ${distro_codename}-security";
   "${distro_id} ${distro_codename}-updates";
 };
-```
 
-#### Optional addons:
+// bmilcs addons ------------------------------
 
-```sh
 // Automatic reboot:
 Unattended-Upgrade::Automatic-Reboot "true";
 Unattended-Upgrade::Automatic-Reboot-Time "1:30"; # Optional
 
 // Remove unused dependencies
 Unattended-Upgrade::Remove-Unused-Dependencies "true";
+
+// --------------------------------------------
 ```
+
+### `sudo unattended-upgrade -v -d --dry-run`
+
+- Test configuration with the above command.
+
+### `sudo unattended-upgrade -v -d`
+
+- Perform an actual run
 
 #### Gmail Notifications \* not working
 
@@ -86,16 +94,4 @@ set smtp-auth-password=secret
 set from="bmilcsn@gmail.com
 
 chmod 400 .mailrc
-```
-
-### `sudo unattended-upgrade -v -d --dry-run`
-
-- Test configuration with the above command.
-
-### `sudo unattended-upgrade -v -d`
-
-- Perform an actual run with
-
-```
-
 ```
