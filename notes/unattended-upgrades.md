@@ -46,3 +46,7 @@ APT::Periodic::AutocleanInterval "12";
 #     3:  + trace on
 # APT::Periodic::Verbose "2";
 ```
+
+## `sudo unattended-upgrade -v -d --dry-run`
+
+Test configuration with the above command.
