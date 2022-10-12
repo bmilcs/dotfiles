@@ -1,3 +1,10 @@
+# git
+alias gpp='git subtree push --prefix dist origin gh-pages'
+alias gs='git status'
+alias gd='git diff'
+alias gdd='git diff --staged'
+alias gcm='git commit -m'
+
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade =y'
 alias upp='up && sudo dist-upgrade -y'
