@@ -5,6 +5,10 @@ alias gd='git diff'
 alias gdd='git diff --staged'
 alias gcm='git commit -m'
 
+# npm
+alias npb='npm run build'
+alias nps='npm run start'
+
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade =y'
 alias upp='up && sudo dist-upgrade -y'

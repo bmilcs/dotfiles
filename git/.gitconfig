@@ -1,0 +1,9 @@
+[user]
+	name = Bryan Miller
+	email = bmilcs@yahoo.com
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
+[core]
+	editor = code --wait
