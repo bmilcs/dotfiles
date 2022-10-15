@@ -7,7 +7,7 @@ alias brs="source ~/.bashrc"
 alias gpp='git subtree push --prefix dist origin gh-pages'
 alias gs='git status'
 alias gd='git diff'
-alias gdd='git diff --staged'
+alias gds='git diff --staged'
 alias gcm='git commit -m'
 
 # npm
