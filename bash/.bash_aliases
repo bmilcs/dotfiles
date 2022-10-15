@@ -15,8 +15,8 @@ alias npb='npm run build'
 alias nps='npm run start'
 
 # system updates & upgrades
-alias up='sudo apt update -y && sudo apt upgrade =y'
-alias upp='up && sudo dist-upgrade -y'
+alias up='sudo apt update -y && sudo apt upgrade -y'
+alias upp='up && sudo apt dist-upgrade -y'
 
 # ls
 alias l='ls'
