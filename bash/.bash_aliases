@@ -1,3 +1,8 @@
+# shortcuts: dotfile related
+alias ali="vim ~/.bash_aliases"
+alias brc="vim ~/.bashrc"
+alias brs="source ~/.bashrc"
+
 # git
 alias gpp='git subtree push --prefix dist origin gh-pages'
 alias gs='git status'
