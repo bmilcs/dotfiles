@@ -1,5 +1,7 @@
 require "bmilcs.options" 
 require "bmilcs.plugins"
 require "bmilcs.colorscheme"
-require "bmilcs.cmp"
+require "bmilcs.nvim-cmp"
 require "bmilcs.lsp-zero"
+require "bmilcs.lsp"
+require "bmilcs.nvim-treesitter"
