@@ -16,7 +16,8 @@ packages=(
 	curl
 	wget
 	git
-	stow)
+	stow
+)
 
 # stow paths: current user only
 currentUser=(
@@ -91,28 +92,28 @@ done
 
 # build neovim from source
 buildNeovim() {
-  # dependencies
+	# dependencies
 	sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
 	git clone https://github.com/neovim/neovim ~/repos/neovim --depth=1
-	cd ~/repos/neovim && \
-	make CMAKE_BUILD_TYPE=RelWithDebInfo && \
-	sudo make install
+	cd ~/repos/neovim &&
+		make CMAKE_BUILD_TYPE=RelWithDebInfo &&
+		sudo make install
 }
 
 # install fonts from resources/fonts
 installFonts() {
-  fontsPath=~/.local/share/fonts/
-  mkdir -p "$fontsPath"
-  cd ./resources/fonts && \
-    cp * "$fontsPath" && \
-  # clear & regenerate font cache
-  fc-cache -f -v
+	fontsPath=~/.local/share/fonts/
+	mkdir -p "$fontsPath"
+	cd ./resources/fonts &&
+		cp * "$fontsPath" &&
+		# clear & regenerate font cache
+		fc-cache -f -v
 }
 
 read -p "DEV Setup? Fonts, NeoVim Build"
 echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  installFonts
+	installFonts
 	#buildNeovim
 fi
