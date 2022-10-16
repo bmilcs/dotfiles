@@ -1,2 +1,2 @@
-require("bmilcs.set")
-require("bmilcs.packer")
+require "bmilcs.options" 
+require "bmilcs.plugins"

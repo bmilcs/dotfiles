@@ -17,7 +17,9 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'Mofiqul/dracula.nvim'
+  use 'dracula/vim'
+  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+
 
   if packer_bootstrap then
     require('packer').sync()
