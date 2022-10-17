@@ -19,11 +19,17 @@ for _, disable_key in pairs(disable_keys) do
 	map("", disable_key, "<nop>")
 end
 
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
+
+-- VIM Config
+map("n", "<leader>vr", ":source $MYVIMRC<CR>") -- reload vim config
+map("n", "<leader>ve", ":e $DOT/nvim/.config/nvim/lua/bmilcs<CR>") -- reload vim config
+map("n", "<leader>vm", ":e $DOT/nvim/.config/nvim/lua/bmilcs/keymap.lua<CR>") -- reload vim config
+
 -- Buffers
 map("n", "<leader>qq", ":bufdo bdelete<CR>") -- kill all buffers
 map("n", "<leader>qQ", ":bufdo bdelete<CR>:q<cr>") -- kill all buffers and quit
@@ -57,7 +63,7 @@ map("n", "<C-Left>", ":vertical resize +2<CR>")
 map("n", "<C-Right>", ":vertical resize -2<CR>")
 
 -- Shortcuts
-map("n", "<leader>dd", ":Lexplore<CR>") -- toggle netrw
+map("n", "<leader>ee", ":Lexplore<CR>") -- toggle netrw
 map("n", "<leader>rr", ":so %<CR>") -- Reload configuration without restart nvim
 map("n", "<C-t>", ":ToggleTerminal<cr>") -- toggle terminal
 
