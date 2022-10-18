@@ -2,8 +2,10 @@
 alias ali="vim ~/.bash_aliases"
 alias brc="vim ~/.bashrc"
 alias brs="source ~/.bashrc"
+alias dfi="(cd $DOT && ./install.sh)"
+alias dfe="vim $DOT/install.sh"
 
-# vim 
+# vim
 alias vim="nvim"
 
 # git
@@ -11,15 +13,19 @@ alias gpp='git subtree push --prefix dist origin gh-pages'
 alias gs='git status'
 alias gd='git diff'
 alias gp='git push'
+alias gf='git fetch'
 alias gds='git diff --staged'
 alias gcm='git commit -m'
+alias ga='git add'
+alias gaa='ga --all'
+alias gl='git log --oneline'
 
 # npm
 alias npb='npm run build'
 alias nps='npm run start'
 
 # system updates & upgrades
-alias up='sudo apt update -y && sudo apt upgrade -y'
+alias up='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean'
 alias upp='up && sudo apt dist-upgrade -y'
 
 # ls
