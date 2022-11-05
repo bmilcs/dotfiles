@@ -66,7 +66,10 @@ Unattended-Upgrade::Remove-Unused-Dependencies "true";
 
 - Perform an actual run
 
-#### Gmail Notifications \* not working
+#### Gmail Notifications
+
+[Source #1](https://www.linuxbabe.com/ubuntu/automatic-security-update-unattended-upgrades-ubuntu)
+[Source #2](https://www.hackingloops.com/postfix-gmail-smtp-kali-linux/)
 
 ```sh
 // Email notifications (recipient)
@@ -80,18 +83,35 @@ Unattended-Upgrade::MailReport "only-on-error";
 Setup SMTP:
 
 ```sh
-sudo su
-apt install bsd-mailx
+# ubuntu 22.04.2
+sudo apt install postfix libsasl2-modules bsd-mailx
+# postfix setup:
+#   Internet Site
+#   local.domain
 
-vi ~/.mairc
+sudo vi /etc/postfix/main.cf
 
-set smtp-use-starttls
-set ssl-verify=ignore
-set smtp=smtp://smtp.gmail.com:587
-set smtp-auth=login
-set smtp-auth-user=bmilcsn@gmail.com
-set smtp-auth-password=secret
-set from="bmilcsn@gmail.com
+  relayhost = [smtp.gmail.com]:587
 
-chmod 400 .mailrc
+  # only send email // not receive
+  inet_interfaces = all
+  inet_interfaces = loopback-only
+
+  # add this to bottom
+  # outbound relay configurations
+  smtp_sasl_auth_enable = yes
+  smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+  smtp_sasl_security_options = noanonymous
+  smtp_tls_security_level = may
+  header_size_limit = 4096000
+
+sudo vi /etc/postfix/sasl_passwd
+
+  [smtp.gmail.com]:587 gmail-address:password
+
+sudo postmap /etc/postfix/sasl_passwd
+sudo systemctl restart postfix
+sudo chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+
+echo "this is a test email." | mailx -r madeup@email.com -s hello realaddy@gmail.com
 ```
