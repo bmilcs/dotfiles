@@ -1,11 +1,11 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # examples: /usr/share/doc/bash/examples/startup-files
 
-#
 # DOTFILES path: $DOT
-#
-
 export DOT=$HOME/repos/dotfiles
+
+# local bin path
+export PATH=/home/bmilcs/.local/bin:$PATH
 
 # if not running interactively, don't do anything
 case $- in

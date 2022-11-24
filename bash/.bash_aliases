@@ -4,12 +4,22 @@ alias brc="vim ~/.bashrc"
 alias brs="source ~/.bashrc"
 alias dfi="(cd $DOT && ./install.sh)"
 alias dfe="vim $DOT/install.sh"
+alias i3e="vim $DOT/i3/.config/i3/config"
+
+# ssh keygen
+alias sshgen="ssh-keygen -t ed25519 -C bmilcs@yahoo.com"
 
 # vim
-alias vim="nvim"
+alias vim="lvim"
 
 # git
-alias gpp='git subtree push --prefix dist origin gh-pages'
+alias gpp='if [ -z "$(git status --porcelain)" ]; then \
+            npm run build && \
+            git add -A && \
+            git commit -m "Build updates to dist/" && \
+            git push && \
+            git subtree push --prefix dist origin dist; \
+          fi'
 alias gs='git status'
 alias gd='git diff'
 alias gp='git push'
