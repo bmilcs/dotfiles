@@ -58,6 +58,8 @@ bindsym  $mute          exec --no-startup-id    bmvol mute
 
 bindsym  $w+Return      exec --no-startup-id    alacritty
 bindsym  $wc+Return     exec --no-startup-id    google-chrome
+bindsym  $ws+Return     exec --no-startup-id    code
+bindsym  $w+d     exec --no-startup-id    discord
 
 #────────────────────────────────────────────────────────  screenshots  ───────
 
@@ -70,33 +72,33 @@ bindsym  $s+Pause       exec --no-startup-id    screenshot -ut all
 #─────────────────────────────────────────────────────  custom scripts  ───────
 
 # bm debug
-bindsym  $w+period       exec --no-startup-id    i3kr -f -n i3debug -c i3debug
+#bindsym  $w+period       exec --no-startup-id    i3kr -f -n i3debug -c i3debug
 
 # bm spy 
-bindsym  $w+comma        exec --no-startup-id    i3kr -f -n i3spy -c i3spy 
+#bindsym  $w+comma        exec --no-startup-id    i3kr -f -n i3spy -c i3spy 
 
 # bm floater
-bindsym  $w+slash        exec --no-startup-id    i3floater
+#bindsym  $w+slash        exec --no-startup-id    i3floater
 
 # bm direct type
-bindsym  $w+d            exec --no-startup-id    i3idotfiles
-bindsym  $wc+d           exec --no-startup-id    i3iuser
-bindsym  $wa+d           exec --no-startup-id    i3isshd
+#bindsym  $w+d            exec --no-startup-id    i3idotfiles
+#bindsym  $wc+d           exec --no-startup-id    i3iuser
+#bindsym  $wa+d           exec --no-startup-id    i3isshd
 
 # bm paste clipboard
-bindsym  $w+p            exec --no-startup-id    i3paste
+#bindsym  $w+p            exec --no-startup-id    i3paste
 
 # bm clone
-bindsym  $w+c            exec --no-startup-id    bmclone
+#bindsym  $w+c            exec --no-startup-id    bmclone
 
 # bm readme
-bindsym  $ws+n           exec --no-startup-id    i3hfr -n bm_readme -c 'i3nvim $BM/readme.md'
+#bindsym  $ws+n           exec --no-startup-id    i3hfr -n bm_readme -c 'i3nvim $BM/readme.md'
 
 # lab notepad
-bindsym  $w+n            exec --no-startup-id    i3hfr -n notepad -c 'i3nvim ~/txt/index.md'
+#bindsym  $w+n            exec --no-startup-id    i3hfr -n notepad -c 'i3nvim ~/txt/index.md'
 
 # music
-bindsym  $w+m            exec --no-startup-id    i3hfr -n ncmpcpp -c ncmpcpp
+#bindsym  $w+m            exec --no-startup-id    i3hfr -n ncmpcpp -c ncmpcpp
 
 #──────────────────────────────────────  keybinds: movement & resizing  ───────
 
@@ -150,9 +152,9 @@ bindsym  $wcs+j     gaps   outer   current  plus 1
 bindsym  $wcs+k     gaps   outer   current  minus 1
 bindsym  $wcs+l     gaps   inner   current  minus 1
 
-# splitt ing
-bindcode $w+47      split h
-bindcode $w+48      split v
+# splitting
+bindsym  $w+x       split v
+bindsym  $w+c       split h
 
 #─────────────────────────────────────────────────────────  workspaces   ──────
 
@@ -177,7 +179,7 @@ bindsym    $wa+5      move container to workspace number $ws5
 #bindsym    $wa+a      move container to workspace number $ws8
 #bindsym    $wa+s      move container to workspace number $ws9
 
-bindsym   $w+1       workspace number $ws1;     focus tiling
+bindsym    $w+1       workspace number $ws1;     focus tiling
 bindsym    $w+2       workspace number $ws2;     focus tiling
 bindsym    $w+3       workspace number $ws3;     focus tiling
 bindsym    $w+4       workspace number $ws4;     focus tiling
@@ -266,24 +268,34 @@ set $yellow1  #EBCB8B
 set $green2   #A3BE8C
 set $purple1  #B48EAD
 
-#class                  border  bg      fg      focus   child_border
-client.focused          $yellow1 $blue2  $blue1  $yellow1 $yellow1
-client.focused_inactive $black1 $blue1  $blue1  $blue1  $black4
-client.unfocused        $black1 $blue1  $black4 $blue1  $black4
-client.urgent           $red1   $red1   $blue1  $red1   $green1
-client.placeholder      $black1 $black1 $green1 $black1 $green1
-client.background       $black1
+# nord
+# class                  border  bg      fg      focus   child_border
+# client.focused          $yellow1 $blue2  $blue1  $blue2 $blue2
+# client.focused_inactive $black1 $blue1  $blue1  $blue1  $black4
+# client.unfocused        $black1 $blue1  $black4 $blue1  $black4
+# client.urgent           $red1   $red1   $blue1  $red1   $green1
+# client.placeholder      $black1 $black1 $green1 $black1 $green1
+# client.background       $black1
+
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
 
 #────────────────────────────────────────────────────────────  startup  ───────
 
 # launch bootstrap2
 #exec       --no-startup-id     i3-msg 'workspace 3; exec ~/bin/wm/bootstrap2'
 
-# launch firefox on ws3
-#exec       --no-startup-id     i3-msg 'workspace 3; exec /usr/bin/env firefox'
+# launch telegram on ws3
+exec       --no-startup-id     i3-msg 'workspace 2; exec /snap/bin/telegram-desktop'
 
-# launch alacritty on ws4
-#exec       --no-startup-id     i3-msg 'workspace 4; exec /usr/bin/alacritty'
+# launch discord on ws3
+exec       --no-startup-id     i3-msg 'workspace 4; exec /snap/bin/discord'
 
 #──────────────────────────────────────────────────  application rules  ───────
 
