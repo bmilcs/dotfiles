@@ -6,4 +6,18 @@
 [color]
 	ui = auto
 [core]
-	editor = code --wait
+  autocrlf = input
+	safecrlf = true
+	editor = nvim
+	excludesFile = ~/.gitignore
+[alias]
+  co = checkout
+  cm = commit -m
+  st = status
+  br = branch
+  type = cat-file -t
+  dump = cat-file -p
+  lg = log --graph --pretty=format:'%Cred%h%Creset - %Cgreen(%ad)%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=local
+	upstream = push -u origin HEAD
+[pull]
+	rebase = false
