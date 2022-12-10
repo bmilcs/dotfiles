@@ -26,13 +26,19 @@ alias gp='git push'
 alias gf='git fetch'
 alias gds='git diff --staged'
 alias gcm='git commit -m'
+alias gcma='git commit --amend'
 alias ga='git add'
 alias gaa='ga --all'
 alias gl='git log --oneline'
+alias grbi='git rebase -i'
+alias grbc='git rebase --continue'
+alias grshard='git reset --hard'
+alias grshead='git reset --head'
 
 # npm
 alias npb='npm run build'
 alias nps='npm run start'
+alias npt='npm run test'
 
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean'
