@@ -34,6 +34,22 @@ alias grbi='git rebase -i'
 alias grbc='git rebase --continue'
 alias grshard='git reset --hard'
 alias grshead='git reset --head'
+alias uprepos='
+cd "~/repos"
+
+# Loop through all subdirectories in the path
+for d in */ ; do
+    # Change to the subdirectory
+    cd "$d"
+
+    # Pull updates from the git repository
+    git pull
+
+    # Change back to the path directory
+    cd ..
+done
+
+'
 
 # npm
 alias npb='npm run build'
