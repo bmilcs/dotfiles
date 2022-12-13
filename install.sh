@@ -29,7 +29,8 @@ devPackages=(
 
 currentUser=(
   alacritty
-  bash 
+  bash
+  bin
   i3
   nvim
 )
@@ -38,8 +39,7 @@ allUsers=(
   git
 )
 
-
-# 
+#
 # utility functions
 #
 
@@ -50,12 +50,12 @@ installFromArray() {
     # if command doesn't exist
     if ! [ -x "$(command -v $i)" ]; then
       echo "- installing $i"
-      sudo apt-get -y install $i && \
+      sudo apt-get -y install $i &&
         echo "done"
     else
       echo "- $i already installed"
     fi
-done
+  done
 }
 
 # installs dotfiles via symlink with stow utility, $1 destination, $2 source
@@ -66,7 +66,7 @@ stowIt() {
   # -v verbose
   # -R restow
   # -t target
-  
+
   # executes stow & if error, catches package name into "conflict" variable
   conflict=$(stow -v -R --adopt -t ${destination} ${sourcePath} 2>&1 |
     awk '/\* existing target is/ {print $NF}')
@@ -76,12 +76,12 @@ stowIt() {
     echo "conflicts found: ${conflict}"
     echo "- moving conflicts to ${backupPath}"
     mkdir -p "$backupPath"
-    
+
     for filename in ${CONFLICTS[@]}; do
       if [[ -f $HOME/$filename || -L $HOME/$filename ]]; then
         echo "BACKING UP: $filename"
-        mv "$HOME/$filename" $backupPath && \
-         echo "Backup successful. Re-run script to stow it again"
+        mv "$HOME/$filename" $backupPath &&
+          echo "Backup successful. Re-run script to stow it again"
       fi
     done
   fi
@@ -96,7 +96,6 @@ sudo apt update -y
 
 echo "installing dependencies"
 installFromArray ${packages[@]}
-
 
 # install root & normal user stuff
 for app in ${allUsers[@]}; do
