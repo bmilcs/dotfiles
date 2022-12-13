@@ -30,26 +30,22 @@ for repo_url in "${repo_urls[@]}"; do
 
   # Check if the repository directory already exists
   if [ -d "$repo_name" ]; then
-    # If the directory exists, change into it
     cd "$repo_name"
+    # Check the status of the repository
+    git_status=$(git status --porcelain)
+    # Check if the repository is pristine (no changes)
+    if [ -z "$git_status" ]; then
+      # If the repository is pristine, pull updates from the remote
+      git pull
+    else
+      # If the repository is not pristine, print a message with the repository name
+      echo "fix: $repo_name"
+    fi
+
+    # Change back to the parent directory
+    cd ..
   else
     # If the directory does not exist, clone the repository
     git clone "$repo_url"
-    # Change into the newly cloned repository
-    cd "$repo_name"
   fi
-
-  # Check the status of the repository
-  git_status=$(git status --porcelain)
-  # Check if the repository is pristine (no changes)
-  if [ -z "$git_status" ]; then
-    # If the repository is pristine, pull updates from the remote
-    git pull
-  else
-    # If the repository is not pristine, print a message with the repository name
-    echo "fix: $repo_name"
-  fi
-
-  # Change back to the parent directory
-  cd ..
 done
