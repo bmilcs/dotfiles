@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 
-# ---------------------------
-# bmilcs dotfiles v3.0
-# - created in 10/2022
-# - utilizes stow for symlinking
-# ---------------------------
-
-#
-# configuration
-#
+# bmilcs dotfiles v3.0 [10/2022]
 
 # paths
 export DOT="$HOME"/repos/dotfiles
@@ -45,8 +37,8 @@ allUsers=(
 
 # installs packages from an array of package names
 installFromArray() {
-  array=($@)
-  for i in "${array[@]}"; do
+  packagesArray=($@)
+  for i in "${packagesArray[@]}"; do
     # if command doesn't exist
     if ! [ -x "$(command -v $i)" ]; then
       echo "- installing $i"
