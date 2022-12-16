@@ -9,8 +9,15 @@ alias i3e="vim $DOT/i3/.config/i3/config"
 # ssh keygen
 alias sshgen="ssh-keygen -t ed25519 -C bmilcs@yahoo.com"
 
-# vim
-alias vim="lvim"
+# vim default: lvim > nvim > vim > vi
+alias vim="vi"
+if command -v lvim >/dev/null; then 
+  alias vi='lvim'
+elif command -v nvim >/dev/null; then 
+  alias vi='nvim'
+elif command -v vim >/dev/null; then 
+  alias vi='vim' 
+fi
 
 # git
 alias gpp='if [ -z "$(git status --porcelain)" ]; then \
