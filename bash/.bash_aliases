@@ -88,3 +88,46 @@ alias ...='cd ../..'
 # rscp & rsync
 alias rscp='rsync -zahv --progress --partial'
 alias rsmv='rscp -zahv --progress --remove-source-files'
+
+#
+# docker
+#
+
+# docker-compose
+alias dcup='cd ~/docker && docker-compose up -d --remove-orphans' #;compdef dcs='docker'
+alias dcstop='cd ~/docker && docker-compose stop' #;compdef dcstop='docker stop '
+alias dcrestart='cd ~/docker && docker-compose restart' #;compdef dcrestart='docker restart '
+alias dcdown='cd ~/docker && docker-compose down' #;compdef dcdown='docker down'
+alias dcinfo='docker system df'
+
+# list all dockers
+alias dps='docker ps -a \
+  --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}" \
+  | (read -r; printf "%s\n" "$REPLY"; sort -k 2  )'
+alias dnet='docker network ls'
+
+# clean up docker system
+alias dclean='docker system prune --volumes'
+alias dclean='dcleani && dcleane'
+alias dcleani='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias dcleane='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
+
+# stop all containres
+alias dcstopall='docker stop $(docker ps -a -q)'
+
+# remove unused: containers | vol | networks | etc
+alias dcnukeold='docker system prune -af'
+
+# remove nfs share volumes
+alias dcnukev='docker volume rm $(docker volume ls | grep docker_)'
+
+# remove all containers
+alias dcnukec='docker rm $(docker ps -a -q)'
+
+# remove all images
+alias dcnukei='docker rmi $(docker images -a -q)'
+
+# nuke ALL: containers | volumes | images
+alias dcnukeall='dcstopall ; dcnukec ; dcnukei ; dcnukev'
+
+
