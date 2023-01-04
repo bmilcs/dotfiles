@@ -7,18 +7,22 @@ live_config_reload: true
 # font
 font:
   normal:
+#   family: "MesloLGS NF"
     family: CaskaydiaCove Nerd Font
     style: SemiBold
 
   bold:
+#   family: "MesloLGS NF"
     family: CaskaydiaCove Nerd Font 
     style: Bold
 
   italic:
+#   family: "MesloLGS NF"
     family: CaskaydiaCove Nerd Font
     style: Italic
 
   bold_italic:
+#   family: "MesloLGS NF"
     family: CaskaydiaCove Nerd Font
     style: Bold Italic
 
