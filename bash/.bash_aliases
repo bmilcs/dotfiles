@@ -5,6 +5,7 @@ alias brs="source ~/.bashrc"
 alias dfi="(cd $DOT && ./install.sh)"
 alias dfe="vim $DOT/install.sh"
 alias i3e="vim $DOT/i3/.config/i3/config"
+alias sshe="vim ~/.ssh/config"
 
 # ssh keygen
 alias sshgen="ssh-keygen -t ed25519 -C bmilcs@yahoo.com"
@@ -20,6 +21,13 @@ elif command -v vim >/dev/null; then
 fi
 
 # git
+alias gppr='if [ -z "$(git status --porcelain)" ]; then \
+            npm run build && \
+            git add -A && \
+            git commit -m "Build updates to build/" && \
+            git push && \
+            git subtree push --prefix build origin build; \
+          fi'
 alias gpp='if [ -z "$(git status --porcelain)" ]; then \
             npm run build && \
             git add -A && \
