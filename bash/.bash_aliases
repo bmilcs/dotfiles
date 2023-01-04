@@ -94,7 +94,7 @@ alias rsmv='rscp -zahv --progress --remove-source-files'
 #
 
 # docker-compose
-alias dcup='cd ~/docker && docker-compose up -d --remove-orphans' #;compdef dcs='docker'
+alias dcup='cd ~/docker && docker-compose pull && docker-compose up --detach --remove-orphans' #;compdef dcs='docker'
 alias dcstop='cd ~/docker && docker-compose stop' #;compdef dcstop='docker stop '
 alias dcrestart='cd ~/docker && docker-compose restart' #;compdef dcrestart='docker restart '
 alias dcdown='cd ~/docker && docker-compose down' #;compdef dcdown='docker down'
