@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+repo_urls=(
+  "https://github.com/bmilcs/odin-project.git"
+  "https://github.com/bmilcs/odin-battleship.git"
+  "https://github.com/bmilcs/odin-testing-practice.git"
+  "https://github.com/bmilcs/odin-knights-travails.git"
+  "https://github.com/bmilcs/odin-binary-search-trees.git"
+  "https://github.com/bmilcs/odin-linked-lists.git"
+  "https://github.com/bmilcs/odin-recursion.git"
+  "https://github.com/bmilcs/odin-weather-app.git"
+  "https://github.com/bmilcs/odin-todo-list.git"
+  "https://github.com/bmilcs/odin-restaurant-page.git"
+  "https://github.com/bmilcs/odin-tic-tac-toe.git"
+  "https://github.com/bmilcs/odin-library.git"
+  "https://github.com/bmilcs/odin-admin-dashboard.git"
+  "https://github.com/bmilcs/odin-signup-form.git"
+  "https://github.com/bmilcs/odin-calculator.git"
+  "https://github.com/bmilcs/odin-etch-a-sketch.git"
+  "https://github.com/bmilcs/odin-rock-paper-scissors.git"
+  "https://github.com/bmilcs/odin-landing-page.git"
+  "https://github.com/bmilcs/odin-recipes.git"
+)
+
+# loop through all repos
+for repo_url in "${repo_urls[@]}"; do
+
+  # extract the repo name from the URL
+  repo_name=$(basename "$repo_url" .git)
+
+  # if the repository directory already exists
+  if [ -d "$repo_name" ]; then
+
+    # change to the repo directory
+    cd "$repo_name"
+
+    # check the status of the repository
+    git_status=$(git status --porcelain)
+
+    # if the repository is porcelain (no changes)
+    if [ -z "$git_status" ]; then
+
+      # pull updates from the remote
+      git pull
+
+    else
+
+      # repository is not pristine
+      echo "fix: $repo_name"
+
+    fi
+
+    # change back to the parent directory
+    cd ..
+
+  else
+
+    # repo does not exist locally: clone it
+    git clone "$repo_url"
+
+  fi
+done
