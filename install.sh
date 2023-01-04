@@ -10,6 +10,8 @@ backupPath="$HOME"/.backup
 packages=(
   git
   stow
+  ncdu
+  nfs-common
 )
 
 devPackages=(
