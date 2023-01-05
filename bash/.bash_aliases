@@ -1,3 +1,6 @@
+# sudo trick
+alias sudo='sudo '
+
 # shortcuts: dotfile related
 alias ali="vim ~/.bash_aliases"
 alias brc="vim ~/.bashrc"
@@ -10,14 +13,18 @@ alias i3e="vim $DOT/i3/.config/i3/config"
 alias sshgen="ssh-keygen -t ed25519 -C bmilcs@yahoo.com"
 
 # vim default: lvim > nvim > vim > vi
-alias vim="vi"
 if command -v lvim >/dev/null; then 
-  alias vi='lvim'
+  alias vim_alias='lvim'
 elif command -v nvim >/dev/null; then 
-  alias vi='nvim'
+  alias vim_alias='nvim'
 elif command -v vim >/dev/null; then 
-  alias vi='vim' 
+  alias vim_alias='vim' 
 fi
+
+# prevent sudo vi/vim from ignoring the alias above
+alias svim="sudo vim_alias"
+alias vim="vim_alias"
+alias svi="sudo vim_alias"
 
 # git
 alias gpp='if [ -z "$(git status --porcelain)" ]; then \
