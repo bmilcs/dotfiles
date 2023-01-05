@@ -48,7 +48,7 @@ Unattended-Upgrade::Origins-Pattern {
 
 // Allow ALL Origins
 Unattended-Upgrade::Origins-Pattern {
-      "origin=*";
+  "*:*";
 };
 
 // --- bmilcs customizations ------------------
