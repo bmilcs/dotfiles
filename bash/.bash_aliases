@@ -20,11 +20,14 @@ elif command -v nvim >/dev/null; then
   alias vim_alias='nvim'
 elif command -v vim >/dev/null; then 
   alias vim_alias='vim' 
+else
+  alias vim_alias='vi'
 fi
 
 # prevent sudo vi/vim from ignoring the alias above
-alias svim="sudo vim_alias"
+alias vi="vim_alias"
 alias vim="vim_alias"
+alias svim="sudo vim_alias"
 alias svi="sudo vim_alias"
 
 # git
