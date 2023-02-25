@@ -9,6 +9,7 @@ alias dfi="(cd $DOT && ./install.sh)"
 alias dfe="vim $DOT/install.sh"
 alias i3e="vim $DOT/i3/.config/i3/config"
 alias sshe="vim ~/.ssh/config"
+alias zsr="source ~/.zshrc"
 
 # ssh keygen
 alias sshgen="ssh-keygen -t ed25519 -C bmilcs@yahoo.com"
@@ -78,18 +79,19 @@ done
 # npm
 alias npb='npm run build'
 alias nps='npm run start'
+alias npd='npm run dev'
 alias npt='npm run test'
 
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean'
 alias upp='up && sudo apt dist-upgrade -y'
 
-# ls
-alias l='ls'
-
 # ls: long form
 alias ls='LC_ALL=C ls -AlhF --color=auto --group-directories-first \
   --time-style="+%D %H:%M"'
+
+# ls
+alias l='ls'
 
 # ls: condensed form
 alias ll='LC_ALL=C command ls -AC --color=auto --group-directories-first \

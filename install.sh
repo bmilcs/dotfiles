@@ -4,6 +4,8 @@
 
 # paths
 export DOT="$HOME"/repos/dotfiles
+export ZSH="$HOME/.config/oh-my-zsh"
+export ZDOTDIR="$HOME/.config/zsh"
 backupPath="$HOME"/.backup
 
 # dependencies
@@ -15,7 +17,7 @@ packages=(
 )
 
 devPackages=(
-  i3-gaps
+  # i3-gaps
   alacritty
 )
 
@@ -25,8 +27,8 @@ currentUser=(
   alacritty
   bash
   bin
-  i3
   nvim
+  zsh
 )
 
 allUsers=(
@@ -55,53 +57,46 @@ installFromArray() {
 # installs dotfiles via symlink with stow utility, $1 destination, $2 source
 stowIt() {
   destination=$1
-  sourcePath=$2
+  folder=$2
 
   # -v verbose
   # -R restow
   # -t target
 
-  # executes stow & if error, catches package name into "conflict" variable
-  conflict=$(stow -v -R --adopt -t ${destination} ${sourcePath} 2>&1 |
-    awk '/\* existing target is/ {print $NF}')
+  mkdir -p $backupPath
 
-  # if error occured, attempt to back up the conflict
-  if [[ ! -z $conflict ]]; then
-    echo "conflicts found: ${conflict}"
-    echo "- moving conflicts to ${backupPath}"
-    mkdir -p "$backupPath"
+  echo "Stowing $folder..."
+  # Use the --adopt option to move conflicting files to ~/backup
+  stow -v -R --adopt -t "$destination" "$folder" 2>&1 |
+    grep -E "WARNING! unstowing $folder" >/dev/null &&
+    stow -D "$folder" &&
+    mv "$HOME/$folder" "$backupPath/$folder-$(date +%Y-%m-%d_%H-%M-%S)" &&
+    stow --adopt -t "$destination" "$folder"
 
-    for filename in ${CONFLICTS[@]}; do
-      if [[ -f $HOME/$filename || -L $HOME/$filename ]]; then
-        echo "BACKING UP: $filename"
-        mv "$HOME/$filename" $backupPath &&
-          echo "Backup successful. Re-run script to stow it again"
-      fi
-    done
-  fi
+  # stow -v -R --adopt -t ${destination} ${sourcePath}
+
+  # # executes stow & if error, catches package name into "conflict" variable
+  # conflict=$(stow -v -R --adopt -t ${destination} ${sourcePath} 2>&1 |
+  #   awk '/\* existing target is/ {print $NF}')
+
+  # # if error occured, attempt to back up the conflict
+  # if [[ ! -z $conflict ]]; then
+  #   echo "conflicts found: ${conflict}"
+  #   echo "- moving conflicts to ${backupPath}"
+  #   mkdir -p "$backupPath"
+
+  #   for filename in ${CONFLICTS[@]}; do
+  #     if [[ -f $HOME/$filename || -L $HOME/$filename ]]; then
+  #       echo "BACKING UP: $filename"
+  #       echo $HOME/$filename
+  #       mv "$HOME/$filename" $backupPath
+  #       conflict=$(stow -v -R --adopt -t ${destination} ${sourcePath} 2>&1 |
+  #         awk '/\* existing target is/ {print $NF}')
+  #       echo $conflict
+  #     fi
+  #   done
+  # fi
 }
-
-#
-# install dependencies
-#
-
-echo "sudo apt update"
-sudo apt update -y
-
-echo "installing dependencies"
-installFromArray ${packages[@]}
-
-# install root & normal user stuff
-for app in ${allUsers[@]}; do
-  stowIt "${HOME}" "${app}"
-done
-
-# install current user stuff only
-for app in ${currentUser[@]}; do
-  if [ "$EUID" -ne 0 ]; then
-    stowIt "${HOME}" "${app}"
-  fi
-done
 
 #
 # install web dev stuff
@@ -147,6 +142,45 @@ installFonts() {
       fc-cache -f -v
   fi
 }
+
+# zsh Setup
+setupZSH() {
+  if [ ! -f "${ZDOTDIR:-$HOME}/.antidote" ]; then
+    git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR:-$HOME}/.antidote"
+  fi
+}
+
+read -p "Install dotfiles?"
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+
+  mkdir -p $ZDOTDIR
+
+  # install root & normal user stuff
+  for app in ${allUsers[@]}; do
+    stowIt "${HOME}" "${app}"
+  done
+
+  # install current user stuff only
+  for app in ${currentUser[@]}; do
+    if [ "$EUID" -ne 0 ]; then
+      stowIt "${HOME}" "${app}"
+    fi
+  done
+fi
+
+read -p "Install packages?"
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  echo "sudo apt update"
+  sudo apt update -y
+
+  echo "installing dependencies"
+  installFromArray ${packages[@]}
+
+  echo "installing zsh package manager"
+  setupZSH
+fi
 
 read -p "Setup DEV Environment?"
 

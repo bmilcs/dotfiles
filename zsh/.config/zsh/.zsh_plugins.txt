@@ -1,0 +1,3 @@
+# zsh plugins
+
+marlonrichert/zsh-autocomplete
