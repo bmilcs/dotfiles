@@ -4,8 +4,9 @@
 
 # paths
 export DOT="$HOME"/repos/dotfiles
-export ZSH="$HOME/.config/oh-my-zsh"
 export ZDOTDIR="$HOME/.config/zsh"
+export ZSH="$HOME/.config/oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
 backupPath="$HOME"/.backup
 
 # dependencies
@@ -145,8 +146,14 @@ installFonts() {
 
 # zsh Setup
 setupZSH() {
-  if [ ! -f "${ZDOTDIR:-$HOME}/.antidote" ]; then
+  if [ ! -f "${ZDOTDIR:-$HOME/.config/zsh}/.antidote}" ]; then
     git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR:-$HOME}/.antidote"
+  fi
+  if [ ! -f "${ZSH:-$HOME/.config/oh-my-zsh}" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
+  if [ ! -f "${ZSH_CUSTOM:-$HOME/.config/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
   fi
 }
 
@@ -178,7 +185,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   echo "installing dependencies"
   installFromArray ${packages[@]}
 
-  echo "installing zsh package manager"
+  echo "zsh setup: oh-my-zsh, powerlevel10k, antidote"
   setupZSH
 fi
 
@@ -187,8 +194,8 @@ read -p "Setup DEV Environment?"
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   echo "installing dev packages"
   # alacritty repo
-  # sudo add-apt-repository ppa:aslatter/ppa
-  # installFromArray ${devPackages[@]}
+  sudo add-apt-repository ppa:aslatter/ppa
+  installFromArray ${devPackages[@]}
   buildI3Gaps
   buildNeovim
   installFonts
