@@ -28,8 +28,8 @@ currentUser=(
   alacritty
   bash
   bin
-  nvim
   zsh
+  # nvim
 )
 
 allUsers=(
@@ -67,36 +67,14 @@ stowIt() {
   mkdir -p $backupPath
 
   echo "Stowing $folder..."
+
   # Use the --adopt option to move conflicting files to ~/backup
-  stow -v -R --adopt -t "$destination" "$folder" 2>&1 |
-    grep -E "WARNING! unstowing $folder" >/dev/null &&
-    stow -D "$folder" &&
-    mv "$HOME/$folder" "$backupPath/$folder-$(date +%Y-%m-%d_%H-%M-%S)" &&
-    stow --adopt -t "$destination" "$folder"
-
-  # stow -v -R --adopt -t ${destination} ${sourcePath}
-
-  # # executes stow & if error, catches package name into "conflict" variable
-  # conflict=$(stow -v -R --adopt -t ${destination} ${sourcePath} 2>&1 |
-  #   awk '/\* existing target is/ {print $NF}')
-
-  # # if error occured, attempt to back up the conflict
-  # if [[ ! -z $conflict ]]; then
-  #   echo "conflicts found: ${conflict}"
-  #   echo "- moving conflicts to ${backupPath}"
-  #   mkdir -p "$backupPath"
-
-  #   for filename in ${CONFLICTS[@]}; do
-  #     if [[ -f $HOME/$filename || -L $HOME/$filename ]]; then
-  #       echo "BACKING UP: $filename"
-  #       echo $HOME/$filename
-  #       mv "$HOME/$filename" $backupPath
-  #       conflict=$(stow -v -R --adopt -t ${destination} ${sourcePath} 2>&1 |
-  #         awk '/\* existing target is/ {print $NF}')
-  #       echo $conflict
-  #     fi
-  #   done
-  # fi
+  stow -v4 --adopt -t "$destination" "$folder"
+  # stow -v -R --adopt -t "$destination" "$folder" && echo 'done'
+  # 2>&1 |
+  #   grep -E "WARNING! unstowing $folder" >/dev/null &&
+  #   stow -D "$folder" &&
+  #   mv "$HOME/$folder" "$backupPath/$folder-$(date +%Y-%m-%d_%H-%M-%S)" &&
 }
 
 #
@@ -157,46 +135,54 @@ setupZSH() {
   fi
 }
 
-read -p "Install dotfiles?"
+installAlacritty() {
+  read -p "Install Alacritty?"
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # alacritty repo
+    sudo add-apt-repository ppa:aslatter/ppa
+    sudo apt update && sudo apt install -y alacritty
+  fi
+}
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+installPackages() {
+  read -p "Install packages?"
 
-  mkdir -p $ZDOTDIR
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "sudo apt update"
+    sudo apt update -y
 
-  # install root & normal user stuff
-  for app in ${allUsers[@]}; do
-    stowIt "${HOME}" "${app}"
-  done
+    echo "installing dependencies"
+    installFromArray ${packages[@]}
 
-  # install current user stuff only
-  for app in ${currentUser[@]}; do
-    if [ "$EUID" -ne 0 ]; then
+    echo "zsh setup: oh-my-zsh, powerlevel10k, antidote"
+    setupZSH
+  fi
+}
+
+installDotfiles() {
+  read -p "Install dotfiles?"
+
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+
+    mkdir -p $ZDOTDIR
+
+    # install root & normal user stuff
+    for app in ${allUsers[@]}; do
       stowIt "${HOME}" "${app}"
-    fi
-  done
-fi
+    done
 
-read -p "Install packages?"
+    # install current user stuff only
+    for app in ${currentUser[@]}; do
+      if [ "$EUID" -ne 0 ]; then
+        stowIt "${HOME}" "${app}"
+      fi
+    done
+  fi
+}
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "sudo apt update"
-  sudo apt update -y
-
-  echo "installing dependencies"
-  installFromArray ${packages[@]}
-
-  echo "zsh setup: oh-my-zsh, powerlevel10k, antidote"
-  setupZSH
-fi
-
-read -p "Setup DEV Environment?"
-
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "installing dev packages"
-  # alacritty repo
-  sudo add-apt-repository ppa:aslatter/ppa
-  installFromArray ${devPackages[@]}
-  buildI3Gaps
-  buildNeovim
-  installFonts
-fi
+installDotfiles
+installPackages
+installAlacritty
+buildI3Gaps
+buildNeovim
+installFonts
