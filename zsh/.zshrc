@@ -16,6 +16,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 source ~/.bash_aliases
 
+# Path to Fly.io
+export FLYCTL_INSTALL="/home/bmilcs/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
 # path expansion ~/.c/z
 setopt extended_glob
 
@@ -105,8 +109,8 @@ source $ZSH/oh-my-zsh.sh
 
 # add nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # source antidote
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
