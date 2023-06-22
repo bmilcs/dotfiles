@@ -1,6 +1,15 @@
 # sudo trick
 alias sudo='sudo '
 
+# windows reboot
+reboot_to_windows()
+{
+    windows_title=$(grep -i windows /boot/grub/grub.cfg | cut -d "'" -f 2)
+    sudo grub-reboot "$windows_title" && sudo reboot
+}
+
+alias rbw='reboot_to_windows'
+
 # shortcuts: dotfile related
 alias ali="vim ~/.bash_aliases"
 alias brc="vim ~/.bashrc"
@@ -10,6 +19,7 @@ alias dfe="vim $DOT/install.sh"
 alias i3e="vim $DOT/i3/.config/i3/config"
 alias sshe="vim ~/.ssh/config"
 alias zsr="source ~/.zshrc"
+alias zse="vi ~/.zshrc"
 
 # ssh keygen
 alias sshgen="ssh-keygen -t ed25519 -C bmilcs@yahoo.com"
@@ -35,9 +45,9 @@ alias svi="sudo vim_alias"
 alias gppr='if [ -z "$(git status --porcelain)" ]; then \
             npm run build && \
             git add -A && \
-            git commit -m "Build updates to build/" && \
+            git commit -m "Build updates to dist/" && \
             git push && \
-            git subtree push --prefix build origin build; \
+            git subtree push --prefix dist origin dist; \
           fi'
 alias gpp='if [ -z "$(git status --porcelain)" ]; then \
             npm run build && \
@@ -84,6 +94,8 @@ alias npb='npm run build'
 alias nps='npm run start'
 alias npd='npm run dev'
 alias npt='npm run test'
+alias upnpm='npm install npm@latest -g && npm update -g'
+alias upnode='nvm install --lts'
 
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean'
