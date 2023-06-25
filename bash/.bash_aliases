@@ -97,6 +97,10 @@ alias npt='npm run test'
 alias upnpm='npm install npm@latest -g && npm update -g'
 alias upnode='nvm install --lts'
 
+# server related
+alias killport='f(){ lsof -i :$1 | awk '"'"'{if(NR>1)print $2}'"'"' | xargs -r kill; unset -f f; }; f'
+alias killnode='killport 3000; killport 5173'
+
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean'
 alias upp='up && sudo apt dist-upgrade -y'
