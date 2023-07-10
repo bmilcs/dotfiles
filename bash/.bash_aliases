@@ -1,6 +1,9 @@
 # sudo trick
 alias sudo='sudo '
 
+# pipe to clipboard
+alias clip='xclip -selection c'
+
 # windows reboot
 reboot_to_windows()
 {
