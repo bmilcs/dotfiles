@@ -15,6 +15,8 @@ packages=(
   stow
   ncdu
   nfs-common
+  fd-find
+  ripgrep
 )
 
 devPackages=(
