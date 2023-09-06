@@ -4,6 +4,9 @@ alias sudo='sudo '
 # pipe to clipboard
 alias clip='xclip -selection c'
 
+# web dev
+alias garn='cd ~/repos/garnished && npm run dev'
+
 # windows reboot
 reboot_to_windows()
 {
@@ -45,6 +48,7 @@ alias svim="sudo vim_alias"
 alias svi="sudo vim_alias"
 
 # git
+alias gppc='git subtree push --prefix client/dist origin dist'
 alias gppr='if [ -z "$(git status --porcelain)" ]; then \
             npm run build && \
             git add -A && \
@@ -64,7 +68,8 @@ alias gd='git diff'
 alias gp='git push'
 alias gf='git fetch'
 alias gds='git diff --staged'
-alias gcm='git commit -m'
+unset gcm
+alias gcm='git commit -m '
 alias gcma='git commit --amend'
 alias ga='git add'
 alias gaa='ga --all'
@@ -102,7 +107,7 @@ alias upnode='nvm install --lts'
 
 # server related
 alias killport='f(){ lsof -i :$1 | awk '"'"'{if(NR>1)print $2}'"'"' | xargs -r kill; unset -f f; }; f'
-alias killnode='killport 3000; killport 5173'
+alias killnode='killport 3000; killport 3001; killport 5173'
 
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean'
