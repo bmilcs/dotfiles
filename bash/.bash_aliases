@@ -7,6 +7,9 @@ alias clip='xclip -selection c'
 # web dev
 alias garn='cd ~/repos/garnished && npm run dev'
 
+# generate access token secrets
+alias gensecret='openssl rand -base64 60 | clip'
+
 # windows reboot
 reboot_to_windows()
 {
@@ -26,6 +29,7 @@ alias i3e="vim $DOT/i3/.config/i3/config"
 alias sshe="vim ~/.ssh/config"
 alias zsr="source ~/.zshrc"
 alias zse="vi ~/.zshrc"
+alias nve="vi ~/.config/nvim/init.lua"
 
 # ssh keygen
 alias sshgen="ssh-keygen -t ed25519 -C bmilcs@yahoo.com"
@@ -107,7 +111,7 @@ alias upnode='nvm install --lts'
 
 # server related
 alias killport='f(){ lsof -i :$1 | awk '"'"'{if(NR>1)print $2}'"'"' | xargs -r kill; unset -f f; }; f'
-alias killnode='killport 3000; killport 3001; killport 5173'
+alias killnode='killport 3000; killport 3001; kill port 3002; killport 5173'
 
 # system updates & upgrades
 alias up='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean'

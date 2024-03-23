@@ -17,6 +17,7 @@ packages=(
   nfs-common
   fd-find
   ripgrep
+  tmux
 )
 
 devPackages=(
@@ -62,21 +63,12 @@ stowIt() {
   destination=$1
   folder=$2
 
-  # -v verbose
-  # -R restow
-  # -t target
-
   mkdir -p $backupPath
 
   echo "Stowing $folder..."
 
   # Use the --adopt option to move conflicting files to ~/backup
   stow -v4 --adopt -t "$destination" "$folder"
-  # stow -v -R --adopt -t "$destination" "$folder" && echo 'done'
-  # 2>&1 |
-  #   grep -E "WARNING! unstowing $folder" >/dev/null &&
-  #   stow -D "$folder" &&
-  #   mv "$HOME/$folder" "$backupPath/$folder-$(date +%Y-%m-%d_%H-%M-%S)" &&
 }
 
 #
@@ -87,11 +79,14 @@ stowIt() {
 buildNeovim() {
   read -p "Build Neovim? (y/n) "
   if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo 'cloning repo'
+    git clone https://github.com/neovim/neovim ~/repos/neovim
     # dependencies
+    echo 'installing deps'
     sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
     git clone https://github.com/neovim/neovim ~/repos/neovim --depth=1
     cd ~/repos/neovim &&
-      make CMAKE_BUILD_TYPE=RelWithDebInfo &&
+      make CMAKE_BUILD_TYPE=Release &&
       sudo make install
   fi
 }
