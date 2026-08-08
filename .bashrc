@@ -25,6 +25,7 @@ alias cfgi='source $INSTALL_SCRIPT'
 alias cfge='vim $INSTALL_SCRIPT'
 alias cfgr='source $HOME/.bashrc'
 alias ali='vim $HOME/.bashrc'
+alias hypre='vim $HOME/.config/hypr/hyprland.lua'
 
 #
 # terminal modifications
