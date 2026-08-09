@@ -230,6 +230,8 @@ hl.config({
         kb_model   = "",
         kb_options = "",
         kb_rules   = "",
+	-- swap control and caps lock
+	kb_options = "ctrl:swapcaps",
 
         follow_mouse = 1,
 
