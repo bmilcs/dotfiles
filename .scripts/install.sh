@@ -13,14 +13,15 @@ echo "--------------------------------"
 
 # arch setup
 if ask_yes_no "Install core components?"; then
-	sudo pacman -Syu --noconfirm sudo openssh
+	sudo pacman -Syu --noconfirm sudo openssh kitty dolphin firefox
 	echo "- core components installed"
+
+	# enable ssh
+	sudo systemctl enable --now sshd
+	echo "- sshd enbled"
 fi
 
-# enable ssh
-sudo systemctl enable --now sshd
-echo "- sshd enbled"
-
+# user setup
 # visudo -- uncomment wheel group
-
+# usermod group wheel
 

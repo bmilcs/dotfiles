@@ -34,6 +34,9 @@ alias cfgg='cfga && cfg commit -m'
 alias ali='vim $HOME/.bashrc'
 alias hypre='vim $HOME/.config/hypr/hyprland.lua'
 
+# vim related
+alias svim="sudo vim"
+
 #
 # terminal modifications
 #
