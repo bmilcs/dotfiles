@@ -45,3 +45,7 @@ alias svim="sudo vim"
 alias ls='ls -a --color=auto'
 alias grep='grep --color=auto'
 
+# Find this line and modify it:
+case "$TERM" in
+    xterm-color|*-256color|xterm-kitty) color_prompt=yes;;
+esac
