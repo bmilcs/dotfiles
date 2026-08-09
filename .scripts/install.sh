@@ -11,14 +11,15 @@ echo "--------------------------------"
 echo "- bmilcs dotfiles installation -"
 echo "--------------------------------"
 
-# arch packages needed
-ask_yes_no("Install sudo and openssh?");
-then
-	pacman -Syu sudo openssh
+# arch setup
+if ask_yes_no "Install core components?"; then
+	sudo pacman -Syu --noconfirm sudo openssh
+	echo "- core components installed"
 fi
 
 # enable ssh
-# sudo systemctl enable --now sshd
+sudo systemctl enable --now sshd
+echo "- sshd enbled"
 
 # visudo -- uncomment wheel group
 
