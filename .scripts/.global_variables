@@ -1,4 +1,6 @@
+#
 # bmilcs global variables
+#
 
 SCRIPTS_DIR="$HOME/.scripts"
 INSTALL_SCRIPT="$SCRIPTS_DIR/install.sh"

@@ -1,8 +1,9 @@
-# =================================================
+# 
 # bmilcs dotfiles v4 installation script
-# =================================================
+#
 
 # helper files
+source "$HOME/.scripts/.global_variables"
 source "$HOME/.scripts/.functions"
 
 # begin

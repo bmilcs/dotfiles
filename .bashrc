@@ -17,6 +17,9 @@ source $HOME/.scripts/.global_variables
 # aliases
 #
 
+# system & app updates
+alias up='sudo pacman -Syu'
+
 # dotfile git command replacement
 alias cfg='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
