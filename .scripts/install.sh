@@ -3,8 +3,9 @@
 #
 
 # helper files
-source "$HOME/.scripts/.global_variables"
-source "$HOME/.scripts/.functions"
+BASE_PATH="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
+source "$BASE_PATH/.scripts/.global_variables"
+source "$BASE_PATH/.scripts/.functions"
 
 # begin
 echo "--------------------------------"
@@ -12,16 +13,17 @@ echo "- bmilcs dotfiles installation -"
 echo "--------------------------------"
 
 # arch setup
-if ask_yes_no "Install core components?"; then
-	sudo pacman -Syu --noconfirm sudo openssh kitty dolphin firefox
+if ask_yes_no "configure core components?"; then
+	# install base packages
+	sudo pacman -Syu --noconfirm sudo openssh kitty dolphin firefox &&
 	echo "- core components installed"
 
 	# enable ssh
-	sudo systemctl enable --now sshd
+	sudo systemctl enable --now sshd &&
 	echo "- sshd enbled"
+
+	# install font
+	sudo mkdir -p /usr/share/fonts &&
+	sudo cp -r $BASE_PATH/.resources/fonts /usr/share/fonts &&
+	echo "- font installed"
 fi
-
-# user setup
-# visudo -- uncomment wheel group
-# usermod group wheel
-
