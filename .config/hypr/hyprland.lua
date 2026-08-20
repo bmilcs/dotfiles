@@ -54,6 +54,10 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd(terminal)
   -- hl.exec_cmd("nm-applet")
   hl.exec_cmd("waybar & hyprpaper & firefox")
+  local hyprland = require("hyprland")
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  hl.exec_cmd("systemctl --user start hyprland-session.target")
+
 end)
 
 
@@ -365,3 +369,4 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
