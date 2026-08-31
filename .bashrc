@@ -19,6 +19,8 @@ source $HOME/.scripts/.global_variables
 
 # system & app updates
 alias up='sudo pacman -Syu'
+alias rb='reboot'
+alias sd='shutdown -h now'
 
 # dotfile git command replacement
 alias cfg='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
