@@ -33,11 +33,17 @@ alias cfgs='cfg status'
 alias cfga='cfg add -u'
 alias cfgp='cfg push'
 alias cfgg='cfga && cfg commit -m'
+alias cfgc='cfg commit -m '
+alias cfgd='cfg diff'
 alias ali='vim $HOME/.bashrc'
 alias hypre='vim $HOME/.config/hypr/hyprland.lua'
 
 # vim related
 alias svim="sudo vim"
+
+# misc
+alias s="sudo"
+alias rM="sudo rm -rf"
 
 #
 # terminal modifications
