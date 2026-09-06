@@ -30,5 +30,5 @@ fi
 
 # curseforge
 if ask_yes_no "install curseforge?"; then
-	mkdir -p ~/bin && wget -O ~/.bin/curseforge.AppImage https://curseforge.overwolf.com/downloads/curseforge-latest-linux.AppImage && chmod +x ~/.bin/curseforge.AppImage
+	mkdir -p ~/.bin && wget -O ~/.bin/curseforge.AppImage https://curseforge.overwolf.com/downloads/curseforge-latest-linux.AppImage && chmod +x ~/.bin/curseforge.AppImage
 fi

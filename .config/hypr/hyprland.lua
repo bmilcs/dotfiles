@@ -401,8 +401,6 @@ if hostname == "bmPC" then
       hl.exec_cmd(youtubeMusic, { workspace = "10 silent" })
       hl.exec_cmd(battlenet, { workspace = "2 silent" })
       hl.exec_cmd("sleep 2 && " .. curseforge, { workspace = "2 silent" })
-      -- hl.exec_cmd(terminal .." --hold sudo pacman -Syu", { workspace = "3 silent" })
-      -- hl.exec_cmd(webBrowser, { workspace = "3 silent" })
     end)
 
 --
@@ -411,6 +409,8 @@ if hostname == "bmPC" then
 
 elseif hostname == "bmTP" then
 
+    -- MONITOR
+    hl.monitor({ output = "eDP-1", mode = "1920x1080@60.05Hz", position = "0x0", scale = 1 })
 
 end
 
