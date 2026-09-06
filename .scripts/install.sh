@@ -15,7 +15,7 @@ echo "--------------------------------"
 # arch setup
 if ask_yes_no "configure core components?"; then
 	# install base packages
-	sudo pacman -Syu --noconfirm sudo openssh kitty dolphin firefox wget &&
+	sudo pacman -Syu --noconfirm sudo openssh kitty dolphin firefox wget diff &&
 	echo "- core components installed"
 
 	# enable ssh
