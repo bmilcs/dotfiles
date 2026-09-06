@@ -15,7 +15,7 @@ echo "--------------------------------"
 # arch setup
 if ask_yes_no "configure core components?"; then
 	# install base packages
-	sudo pacman -Syu --noconfirm sudo openssh kitty dolphin firefox &&
+	sudo pacman -Syu --noconfirm sudo openssh kitty dolphin firefox wget &&
 	echo "- core components installed"
 
 	# enable ssh
@@ -26,4 +26,9 @@ if ask_yes_no "configure core components?"; then
 	sudo mkdir -p /usr/share/fonts &&
 	sudo cp -r $BASE_PATH/.resources/fonts /usr/share/fonts &&
 	echo "- font installed"
+fi
+
+# curseforge
+if ask_yes_no "install curseforge?"; then
+	mkdir -p ~/bin && wget -O ~/.bin/curseforge.AppImage https://curseforge.overwolf.com/downloads/curseforge-latest-linux.AppImage && chmod +x ~/.bin/curseforge.AppImage
 fi

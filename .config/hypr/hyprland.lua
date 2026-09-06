@@ -36,9 +36,7 @@ local disc        = "discord"
 hl.on("hyprland.start", function () 
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("systemctl --user start hyprland-session.target")
-  local hyprland = require("hyprland")
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  -- essentials
   hl.exec_cmd("waybar & hyprpaper")
 end)
 
