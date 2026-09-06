@@ -1,18 +1,16 @@
 -- require("myColors")
 
-
 ------------------
 ---- MONITORS ----
 ------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
     scale    = "auto",
 })
-
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -21,40 +19,36 @@ hl.monitor({
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local menu        = "hyprlauncher"
+local appMenu     = "hyprlauncher"
 local webBrowser  = "firefox"
-
+local youtubeMusic = webBrowser .. " --new-window https://music.youtube.com/playlist?list=LM"
+local curseforge  = "~/.bin/curseforge.AppImage"
+local battlenet   = "lutris lutris:rungame/battlenet"
+local disc        = "discord"
 
 -------------------
 ---- AUTOSTART ----
 -------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
-
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
---
 hl.on("hyprland.start", function () 
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("systemctl --user start hyprland-session.target")
   local hyprland = require("hyprland")
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-
   -- essentials
   hl.exec_cmd("waybar & hyprpaper")
-
 end)
-
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
-
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
-
 
 -----------------------
 ----- PERMISSIONS -----
@@ -74,7 +68,6 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
-
 -----------------------
 ---- LOOK AND FEEL ----
 -----------------------
@@ -84,38 +77,30 @@ hl.config({
     general = {
         gaps_in  = 10,
         gaps_out = 10,
-
         border_size = 2,
-
         col = {
             active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
             inactive_border = "rgba(595959aa)",
         },
-
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false,
-
+        resize_on_border = true,
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
-
         layout = "dwindle",
     },
 
     decoration = {
         rounding       = 10,
         rounding_power = 2,
-
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
-
         shadow = {
             enabled      = true,
             range        = 4,
             render_power = 3,
             color        = 0xee1a1a1a,
         },
-
         blur = {
             enabled   = true,
             size      = 3,
@@ -123,7 +108,6 @@ hl.config({
             vibrancy  = 0.1696,
         },
     },
-
     animations = {
         enabled = true,
     },
@@ -207,7 +191,6 @@ hl.config({
     },
 })
 
-
 ---------------
 ---- INPUT ----
 ---------------
@@ -221,11 +204,8 @@ hl.config({
         kb_rules   = "",
 	-- swap control and caps lock
 	kb_options = "ctrl:nocaps",
-
         follow_mouse = 1,
-
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
-
         touchpad = {
             natural_scroll = false,
         },
@@ -238,13 +218,12 @@ hl.gesture({
     action = "workspace"
 })
 
--- Example per-device config
+-- Device specific
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
 hl.device({
     name        = "epic-mouse-v1",
     sensitivity = -0.5,
 })
-
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -253,15 +232,17 @@ hl.device({
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0, action = "toggle" }))
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(webBrowser))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(youtubeMusic))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(battlenet))
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(curseforge))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(appMenu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + G", hl.dsp.layout("togglesplit"))    -- dwindle only
 
@@ -309,7 +290,6 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
-
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -323,7 +303,6 @@ local suppressMaximizeRule = hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
     name  = "suppress-maximize-events",
     match = { class = ".*" },
-
     suppress_event = "maximize",
 })
 -- suppressMaximizeRule:set_enabled(false)
@@ -339,7 +318,6 @@ hl.window_rule({
         fullscreen = false,
         pin        = false,
     },
-
     no_focus = true,
 })
 
@@ -362,10 +340,12 @@ hl.window_rule({
 -- WoW windowrule
 hl.window_rule({
     name = "world_of_warcraft",
+    match = { title = "World of Warcraft" },
     content = "game",
+    fullscreen = true,
     immediate = false,
-    -- stay_focused = true,
     decorate = false,
+    float = true,
     no_blur = true,
     border_size = 0,
     no_screen_share = true,
@@ -373,46 +353,66 @@ hl.window_rule({
     no_max_size = true,
     no_shadow = true,
     no_anim = true,
-    workspace = 10,
-    match = { title = "World of Warcraft" },
     workspace = 1,
+})
+
+-- Battle.net
+hl.window_rule({
+    match = { title = "Battle.net" },
+    immediate = false,
+    workspace = 2,
+})
+
+-- CurseForge
+hl.window_rule({
+    match = { class = "curseforge" },
+    immediate = false,
+    workspace = 2,
 })
 
 --
 -- host based customizations
 --
 
+-- acquire current hostname
 local handle = io.popen("cat /etc/hostname") 
 local hostname = handle:read("*a"):gsub("%s+", "") -- reads and removes whitespace
 handle:close()
 
--- 
--- DESKTOP
+--
+-- my desktop
 --
 
 if hostname == "bmPC" then
 
-    -- WORKSPACE / MONITOR SETUP
-    hl.workspace_rule({ workspace = "10", monitor = "HDMI-A-1" })
+    -- WORKSPACES
+    hl.workspace_rule({ workspace = "10", monitor = "HDMI-A-1" }) -- top monitor dedicated workspace
+    hl.workspace_rule({ workspace = "1", gaps_out = 0, gaps_in = 0 }) -- gaming workspace
     for i = 1, 9 do
         local key = i
-    	hl.workspace_rule({ workspace = key, monitor = "DP-2" })
+    	hl.workspace_rule({ workspace = key, monitor = "DP-2" }) -- primary monitor
     end
-    hl.workspace_rule({ workspace = "1", gaps_out = 0 })
+
+    -- MONITORS 
+    hl.monitor({ output = "DP-2", mode = "3440x1440@59.97Hz", position = "0x0", scale = 1 })
+    hl.monitor({ output = "HDMI-A-1", mode = "2560x1440@59.95Hz", position = "515x-1440", scale = 1 })
 
     -- LAUNCH APPS ON START
     hl.on("hyprland.start", function ()
-      hl.exec_cmd("discord", { workspace = "10 silent" })
-      hl.exec_cmd("firefox https://music.youtube.com", { workspace = "10 silent" })
-      hl.exec_cmd("lutris lutris:rungame/battlenet", { workspace = "2 silent" })
-      hl.exec_cmd("kitty --hold sudo pacman -Syu", { workspace = "2 silent" })
+      hl.exec_cmd(disc, { workspace = "10 silent" })
+      hl.exec_cmd(youtubeMusic, { workspace = "10 silent" })
+      hl.exec_cmd(battlenet, { workspace = "2 silent" })
+      hl.exec_cmd("sleep 2 && " .. curseforge, { workspace = "2 silent" })
+      -- hl.exec_cmd(terminal .." --hold sudo pacman -Syu", { workspace = "3 silent" })
+      -- hl.exec_cmd(webBrowser, { workspace = "3 silent" })
     end)
 
 --
--- LAPTOP
+-- my laptop
 --
 
 elseif hostname == "bmTP" then
+
 
 end
 
