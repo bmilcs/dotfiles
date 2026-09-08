@@ -90,7 +90,8 @@ hl.gesture({
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local mainMod = "SUPER"
+local altMod = "CTRL"
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0, action = "toggle" }))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
@@ -113,6 +114,12 @@ hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L",  hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + K",  hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
+
+-- Resize focused window
+hl.bind(mainMod .. " + " .. altMod .. " + L", hl.dsp.window.resize({ x = 10, y = 0, relative = true }))
+hl.bind(mainMod .. " + " .. altMod .. " + H", hl.dsp.window.resize({ x = -10, y = 0, relative = true }))
+hl.bind(mainMod .. " + " .. altMod .. " + K", hl.dsp.window.resize({ x = 0, y = -10, relative = true }))
+hl.bind(mainMod .. " + " .. altMod .. " + J", hl.dsp.window.resize({ x = 0, y = 10, relative = true }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -139,6 +146,8 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
+hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
