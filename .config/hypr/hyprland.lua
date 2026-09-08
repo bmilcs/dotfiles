@@ -400,7 +400,7 @@ if hostname == "bmPC" then
       hl.exec_cmd(disc, { workspace = "10 silent" })
       hl.exec_cmd(youtubeMusic, { workspace = "10 silent" })
       hl.exec_cmd(battlenet, { workspace = "2 silent" })
-      hl.exec_cmd("sleep 2 && " .. curseforge, { workspace = "2 silent" })
+      hl.exec_cmd(curseforge, { workspace = "2 silent" })
     end)
 
 --
