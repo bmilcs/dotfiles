@@ -1,4 +1,3 @@
-
 require("appearance")
 local colors = require("colors")
 
@@ -18,7 +17,6 @@ hl.monitor({
 ---- MY PROGRAMS ----
 ---------------------
 
--- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "dolphin"
 local appMenu     = "hyprlauncher"
@@ -33,8 +31,6 @@ local disc        = "discord"
 -------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
--- Autostart necessary processes (like notifications daemons, status bars, etc.)
--- Or execute your favorite apps at launch like this:
 hl.on("hyprland.start", function () 
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("systemctl --user start hyprland-session.target")
