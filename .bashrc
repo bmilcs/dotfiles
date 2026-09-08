@@ -57,3 +57,6 @@ alias grep='grep --color=auto'
 case "$TERM" in
     xterm-color|*-256color|xterm-kitty) color_prompt=yes;;
 esac
+
+# env var for qt6 engine
+QT_QPA_PLATFORMTHEME=hyprqt6engine
