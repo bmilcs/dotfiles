@@ -22,6 +22,7 @@ local fileManager = "dolphin"
 local appMenu     = "hyprlauncher"
 local webBrowser  = "firefox"
 local youtubeMusic = webBrowser .. " --new-window https://music.youtube.com/playlist?list=LM"
+local classwork  = webBrowser .. " --new-window https://tms.protechskillsinstitute.org/login"
 local curseforge  = "~/.bin/curseforge.AppImage"
 local battlenet   = "lutris lutris:rungame/battlenet"
 local disc        = "discord"
@@ -74,7 +75,7 @@ hl.config({
         touchpad = {
             natural_scroll = false,
         },
-	-- swap control and caps lock
+	-- make caps lock behave like ctrl, remove capslock altogether
 	kb_options = "ctrl:nocaps",
     },
 })
@@ -98,6 +99,7 @@ local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(webBrowser))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(youtubeMusic))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(classwork))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(battlenet))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(curseforge))
@@ -273,5 +275,13 @@ elseif hostname == "bmTP" then
     -- MONITOR
     hl.monitor({ output = "eDP-1", mode = "1920x1080@60.05Hz", position = "0x0", scale = 1 })
 
+    -- LAUNCH APPS ON START
+    hl.on("hyprland.start", function ()
+      hl.exec_cmd(disc, { workspace = "10 silent" })
+      hl.exec_cmd(youtubeMusic, { workspace = "10 silent" })
+      hl.exec_cmd(battlenet, { workspace = "3 silent" })
+      hl.exec_cmd(curseforge, { workspace = "3 silent" })
+      hl.exec_cmd(classwork, { workspace = "1 silent" })
+    end)
 end
 
