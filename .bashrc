@@ -50,7 +50,7 @@ alias rM="sudo rm -rf"
 #
 
 # color mods
-alias ls='ls -a --color=auto'
+alias ls='ls -al --color=auto'
 alias grep='grep --color=auto'
 
 # Find this line and modify it:

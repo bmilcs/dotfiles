@@ -22,7 +22,7 @@ local fileManager = "dolphin"
 local appMenu     = "hyprlauncher"
 local webBrowser  = "firefox"
 local youtubeMusic = webBrowser .. " --new-window https://music.youtube.com/playlist?list=LM"
-local classwork  = webBrowser .. " --new-window https://tms.protechskillsinstitute.org/login"
+local classwork  = webBrowser .. " --new-window https://lms.protechskillsinstitute.org/"
 local curseforge  = "~/.bin/curseforge.AppImage"
 local battlenet   = "lutris lutris:rungame/battlenet"
 local disc        = "discord"
@@ -116,10 +116,10 @@ hl.bind(mainMod .. " + K",  hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
 
 -- Resize focused window
-hl.bind(mainMod .. " + " .. altMod .. " + L", hl.dsp.window.resize({ x = 10, y = 0, relative = true }))
-hl.bind(mainMod .. " + " .. altMod .. " + H", hl.dsp.window.resize({ x = -10, y = 0, relative = true }))
-hl.bind(mainMod .. " + " .. altMod .. " + K", hl.dsp.window.resize({ x = 0, y = -10, relative = true }))
-hl.bind(mainMod .. " + " .. altMod .. " + J", hl.dsp.window.resize({ x = 0, y = 10, relative = true }))
+hl.bind(mainMod .. " + " .. altMod .. " + L", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + " .. altMod .. " + H", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + " .. altMod .. " + K", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + " .. altMod .. " + J", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -145,13 +145,25 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Laptop multimedia keys for volume and LCD brightness
-hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
+-- Audio control
+-- volume up
+hl.bind(mainMod .. " + " .. altMod .. " + F", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+-- volume down
+hl.bind(mainMod .. " + " .. altMod .. " + D", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
+-- volume mute
+hl.bind(mainMod .. " + " .. altMod .. " + A", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
+hl.bind(mainMod .. " + " .. altMod .. " + A", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+-- play pause, next, prev
+hl.bind(mainMod .. " + " .. altMod .. " + R", hl.dsp.exec_cmd("playerctl previous"), { locked = true, repeating = false })
+hl.bind(mainMod .. " + " .. altMod .. " + E", hl.dsp.exec_cmd("playerctl next"), { locked = true, repeating = false })
+hl.bind(mainMod .. " + " .. altMod .. " + Q", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true, repeating = false })
+
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
+
+-- Screen brightness
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
 
@@ -287,7 +299,6 @@ elseif hostname == "bmTP" then
     -- LAUNCH APPS ON START
     hl.on("hyprland.start", function ()
       hl.exec_cmd(disc, { workspace = "10 silent" })
-      hl.exec_cmd(youtubeMusic, { workspace = "10 silent" })
       hl.exec_cmd(battlenet, { workspace = "3 silent" })
       hl.exec_cmd(curseforge, { workspace = "3 silent" })
       hl.exec_cmd(classwork, { workspace = "1 silent" })

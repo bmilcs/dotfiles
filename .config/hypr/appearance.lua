@@ -6,8 +6,8 @@ local colors = require("colors")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 15,
-        gaps_out = 25,
+        gaps_in  = 5,
+        gaps_out = 10,
         border_size = 3,
         col = {
             active_border = colors.cyan,
