@@ -8,7 +8,7 @@
 [[ $- != *i* ]] && return
 
 # terminal prompt style
-PS1='[\u@\h \W]\$ '
+PS1="\[\033[0;36m\]\u\[\033[0m\]@\[\033[0;32m\]\h\[\033[0m\]:\[\033[0;35m\]\w\[\033[0m\]\$ "
 
 # register global variables
 source $HOME/.scripts/.global_variables
