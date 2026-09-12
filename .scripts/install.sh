@@ -4,6 +4,7 @@
 
 # helper files
 BASE_PATH="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
+PACKAGE_LIST="$BASE_PATH/.scripts/.packages"
 source "$BASE_PATH/.scripts/.global_variables"
 source "$BASE_PATH/.scripts/.functions"
 
@@ -15,14 +16,14 @@ echo "--------------------------------"
 # arch setup
 if ask_yes_no "configure core components?"; then
 	# install base packages
-	sudo pacman -Syu --noconfirm sudo openssh less kitty neovim wl-clipboard dolphin firefox wget hyprcursor hyprlauncher hyprpaper hyprtoolkit git base-devel debugedit grim slurp swappy &&
+	sudo pacman -S --needed --noconfirm $(grep -v '^#' $PACKAGE_LIST) &&
 	echo "- core components installed"
 
 	# install yay
 	if ! command -v yay &> /dev/null; then
-  		git clone https://aur.archlinux.org/yay.git
+    git clone https://aur.archlinux.org/yay.git
  		cd yay
-        	makepkg -si	
+    makepkg -si	
 	fi
 
 	# enable ssh
