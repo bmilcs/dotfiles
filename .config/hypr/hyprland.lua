@@ -18,7 +18,7 @@ hl.monitor({
 
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local appMenu     = "rofi -show combi -combi-modi 'drun,ssh' -modi combi"
+local appMenu     = "rofi -show combi -combi-modi 'drun' -modi combi -combi-hide-mode-prefix"
 local webBrowser  = "firefox"
 local youtubeMusic = webBrowser .. " --new-window https://music.youtube.com/playlist?list=LM"
 local classwork  = webBrowser .. " --new-window https://lms.protechskillsinstitute.org/"
