@@ -242,14 +242,14 @@ hl.window_rule({
 hl.window_rule({
     match = { title = "Battle.net" },
     immediate = false,
-    workspace = 2,
+    workspace = 3,
 })
 
 -- CurseForge
 hl.window_rule({
     match = { class = "curseforge" },
     immediate = false,
-    workspace = 2,
+    workspace = 3,
 })
 
 --
@@ -261,13 +261,11 @@ local handle = io.popen("cat /etc/hostname")
 local hostname = handle:read("*a"):gsub("%s+", "") -- reads and removes whitespace
 handle:close()
 
---
--- MY DESKTOP
---
+-- host conditionals
 
 if hostname == "bmPC" then
 
-    -- WORKSPACES
+    -- DESKTOP WORKSPACES
     hl.workspace_rule({ workspace = "10", monitor = "HDMI-A-1" }) -- top monitor dedicated workspace
     hl.workspace_rule({ workspace = "1", gaps_out = 0, gaps_in = 0 }) -- gaming workspace
     for i = 1, 9 do
@@ -275,28 +273,24 @@ if hostname == "bmPC" then
     	hl.workspace_rule({ workspace = key, monitor = "DP-2" }) -- primary monitor
     end
 
-    -- MONITORS 
+    -- DESKTOP MONITORS 
     hl.monitor({ output = "DP-2", mode = "3440x1440@59.97Hz", position = "0x0", scale = 1 })
     hl.monitor({ output = "HDMI-A-1", mode = "2560x1440@59.95Hz", position = "515x-1440", scale = 1 })
 
-    -- LAUNCH APPS ON START
+    -- DESKTOP LAUNCH APPS ON START
     hl.on("hyprland.start", function ()
       hl.exec_cmd(disc, { workspace = "10 silent" })
       hl.exec_cmd(youtubeMusic, { workspace = "10 silent" })
-      hl.exec_cmd(battlenet, { workspace = "2 silent" })
-      hl.exec_cmd(curseforge, { workspace = "2 silent" })
+      hl.exec_cmd(battlenet, { workspace = "3 silent" })
+      hl.exec_cmd(curseforge, { workspace = "3 silent" })
     end)
-
---
--- MY LAPTOP
---
 
 elseif hostname == "bmTP" then
 
-    -- MONITOR
+    -- LAPTOP MONITOR
     hl.monitor({ output = "eDP-1", mode = "1920x1080@60.05Hz", position = "0x0", scale = 1 })
 
-    -- LAUNCH APPS ON START
+    -- LAPTOP LAUNCH APPS ON START
     hl.on("hyprland.start", function ()
       hl.exec_cmd(disc, { workspace = "10 silent" })
       hl.exec_cmd(battlenet, { workspace = "3 silent" })

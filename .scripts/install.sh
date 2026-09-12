@@ -15,7 +15,7 @@ echo "--------------------------------"
 # arch setup
 if ask_yes_no "configure core components?"; then
 	# install base packages
-	sudo pacman -Syu --noconfirm sudo openssh less kitty dolphin firefox wget hyprcursor hyprlauncher hyprpaper hyprtoolkit git base-devel debugedit grim slurp swappy &&
+	sudo pacman -Syu --noconfirm sudo openssh less kitty neovim wl-clipboard dolphin firefox wget hyprcursor hyprlauncher hyprpaper hyprtoolkit git base-devel debugedit grim slurp swappy &&
 	echo "- core components installed"
 
 	# install yay

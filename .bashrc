@@ -39,6 +39,8 @@ alias ali='vim $HOME/.bashrc'
 alias hypre='vim $HOME/.config/hypr/hyprland.lua'
 
 # vim related
+alias vime="vim ~/.config/nvim/init.lua"
+alias vim="nvim"
 alias svim="sudo vim"
 
 # misc
