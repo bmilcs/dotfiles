@@ -36,7 +36,7 @@ alias cfgg='cfga && cfg commit -m'
 alias cfgc='cfg commit -m '
 alias cfgd='cfg diff'
 alias ali='vim $HOME/.bashrc'
-alias hypre='vim $HOME/.config/hypr/hyprland.lua'
+alias hypre='vim $HOME/.config/hypr'
 
 # vim related
 alias vime="vim ~/.config/nvim/init.lua"
