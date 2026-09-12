@@ -13,7 +13,19 @@ vim.keymap.set("n", "<leader>p", '"+p', { noremap = true, silent = true, desc = 
 vim.keymap.set("v", "<leader>p", '"+p', { noremap = true, silent = true, desc = "" })
 
 -- tab behavior
-vim.opt.tabstop = 2      -- number of spaces that a <tab> in the file counts for
-vim.opt.softtabstop = 2  -- number of spaces that a <tab> counts for while performing editing operations
-vim.opt.shiftwidth = 2   -- number of spaces to use for each step of (auto)indent
-vim.opt.expandtab = true -- convert tabs to spaces
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+
+-- max line width
+vim.opt.textwidth = 80
+vim.opt.colorcolumn = "80"
+
+-- move current line up/down - alt + movement
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down" })
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
