@@ -2,19 +2,21 @@
 sudo
 openssh
 less
-kitty
+wget
+base-devel
+debugedit
+git
 neovim
+# hyprland
+kitty
 wl-clipboard
 dolphin
 firefox
-wget
 hyprcursor
 hyprlauncher
 hyprpaper
 hyprtoolkit
-git
-base-devel
-debugedit
 grim
 slurp
 swappy
+rofi

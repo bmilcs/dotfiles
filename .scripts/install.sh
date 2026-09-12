@@ -1,4 +1,4 @@
-# 
+#
 # bmilcs dotfiles v4 installation script
 #
 
@@ -21,26 +21,28 @@ if ask_yes_no "configure core components?"; then
 
 	# install yay
 	if ! command -v yay &> /dev/null; then
-    git clone https://aur.archlinux.org/yay.git
- 		cd yay
-    makepkg -si	
+    git clone https://aur.archlinux.org/yay.git &&
+ 		  cd yay &&
+      makepkg -si	&&
+      echo "- yay installed"
 	fi
 
 	# enable ssh
 	sudo systemctl enable --now sshd &&
-	echo "- sshd enbled"
+	  echo "- sshd enbled"
 
 	# install font
 	sudo mkdir -p /usr/share/fonts &&
-	sudo cp -r $BASE_PATH/.resources/fonts /usr/share/fonts &&
-	echo "- font installed"
+	  sudo cp -r $BASE_PATH/.resources/fonts /usr/share/fonts &&
+	  echo "- font installed"
 fi
 
 # curseforge
 if ask_yes_no "install curseforge?"; then
-	mkdir -p ~/.bin && wget -O ~/.bin/curseforge.AppImage https://curseforge.overwolf.com/downloads/curseforge-latest-linux.AppImage && chmod +x ~/.bin/curseforge.AppImage
+	mkdir -p ~/.bin &&
+    wget -O ~/.bin/curseforge.AppImage https://curseforge.overwolf.com/downloads/curseforge-latest-linux.AppImage && 
+    chmod +x ~/.bin/curseforge.AppImage
 fi
-
 
 # zen browser
 if ask_yes_no "install zen browser?"; then
