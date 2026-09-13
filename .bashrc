@@ -7,6 +7,10 @@
 # if not running interactively, end
 [[ $- != *i* ]] && return
 
+# set locale all
+export LC_ALL=en_US.UTF-8
+bind 'set completion-ignore-case on'
+
 # terminal prompt style
 PS1="\[\033[0;36m\]\u\[\033[0m\]@\[\033[0;32m\]\h\[\033[0m\]:\[\033[0;35m\]\w\[\033[0m\]\$ "
 
@@ -27,8 +31,8 @@ alias cfg='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 # dotfile editing & executing
 alias cfgi='source $INSTALL_SCRIPT'
-alias cfge='vim $INSTALL_SCRIPT'
 alias cfgr='source $HOME/.bashrc'
+alias cfge='vim $INSTALL_SCRIPT'
 alias cfgs='cfg status'
 alias cfga='cfg add -u'
 alias cfgp='cfg push'
@@ -37,15 +41,17 @@ alias cfgc='cfg commit -m '
 alias cfgd='cfg diff'
 alias ali='vim $HOME/.bashrc'
 alias hypre='vim $HOME/.config/hypr'
+alias vime='vim $HOME/.config/nvim/init.lua'
+alias kittye='vim $HOME/.config/kitty'
 
 # vim related
-alias vime="vim ~/.config/nvim/init.lua"
 alias vim="nvim"
 alias svim="sudo vim"
 
 # misc
 alias s="sudo"
-alias rM="sudo rm -rf"
+alias rM="rm -rf"
+alias sRM="sudo rm -rf"
 
 #
 # terminal modifications
