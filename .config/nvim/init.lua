@@ -1,5 +1,20 @@
+-- plugins
+vim.pack.add({
+  -- themes
+  { src = "https://github.com/maxmx03/dracula.nvim" },
+  -- { src = "https://github.com/catppuccin/nvim" },
+  -- { src = "https://github.com/folke/tokyonight.nvim" },
+  -- { src = "https://github.com/gbprod/nord.nvim" },
+})
+
+-- color scheme
+vim.cmd[[colorscheme dracula]]
+
 -- leader
 vim.g.mapleader = " "
+
+-- reload nvim
+vim.keymap.set('n', '<leader>r', '<cmd>restart<CR>') 
 
 -- clipboard config
 vim.api.nvim_set_option("clipboard", "")
@@ -29,3 +44,5 @@ vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down" })
 vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+
