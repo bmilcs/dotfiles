@@ -43,7 +43,8 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("QT_QPA_PLATFORMTHEME", "hyprqt6engine")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("QT_STYLE_OVERRIDE", "kvantum")
 
 ----------------
 ----  MISC  ----
@@ -290,4 +291,3 @@ elseif hostname == "bmTP" then
       hl.exec_cmd(classwork, { workspace = "1 silent" })
     end)
 end
-

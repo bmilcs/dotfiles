@@ -33,8 +33,22 @@ if ask_yes_no "configure core components?"; then
 
 	# install font
 	sudo mkdir -p /usr/share/fonts &&
-	  sudo cp -r $BASE_PATH/.resources/fonts /usr/share/fonts &&
+	  sudo cp -r $BASE_PATH/.resources/fonts/* /usr/share/fonts &&
 	  echo "- font installed"
+
+  # install icons
+  sudo mkdir -p /usr/share/icons &&
+	  sudo cp -r $BASE_PATH/.resources/icons/* /usr/share/icons &&
+	  echo "- icons installed"
+
+  # install gtk themes
+  sudo mkdir -p /usr/share/themes /usr/share/qtcreator/styles /usr/share/qtcreator/themes &&
+    # gtk
+    sudo cp -r $BASE_PATH/.resources/themes/gtk/* /usr/share/themes &&
+    # qt 
+    echo "- themes installed"
+
+
 fi
 
 # curseforge
