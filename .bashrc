@@ -43,28 +43,30 @@ alias ali='vim $HOME/.bashrc'
 alias hypre='vim $HOME/.config/hypr'
 alias vime='vim $HOME/.config/nvim/init.lua'
 alias kittye='vim $HOME/.config/kitty'
+alias rofie='vim $HOME/.config/rofi'
 
 # vim related
 alias vim="nvim"
 alias svim="sudo vim"
 
 # misc
-alias s="sudo"
-alias rM="rm -rf"
-alias sRM="sudo rm -rf"
+alias s='sudo'
+alias rM='rm -rf'
+alias sRM='sudo rm -rf'
+alias l='ls'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias fonts='fc-list : family'
 
 #
 # terminal modifications
 #
 
 # color mods
-alias ls='ls -al --color=auto'
+alias ls='ls -ahl --color=auto'
 alias grep='grep --color=auto'
 
 # Find this line and modify it:
 case "$TERM" in
     xterm-color|*-256color|xterm-kitty) color_prompt=yes;;
 esac
-
-# env var for qt6 engine
-QT_QPA_PLATFORMTHEME=hyprqt6engine
