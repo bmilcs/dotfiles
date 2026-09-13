@@ -1,38 +1,116 @@
-@import url("./colors.css");
+@import "themes/mocha.css";
+
 * {
     border: none;
     border-radius: 0;
-    font-family: JetBrainsMono;
-    font-size: 11pt;
+    font-family: JetBrainsMono Nerd Font, monospace;
+    font-weight: bold;
+    font-size: 14px;
     min-height: 0;
 }
+
 window#waybar {
-    opacity: 0.9;
-    background: @background-darker;
-    color: @foreground;
-    border-bottom: 2px solid @background;
+    background: rgba(21, 18, 27, 0);
+    color: #fcfcfc;
 }
+
+tooltip {
+    background: @base;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: @mantle
+}
+
 #workspaces button {
-    padding: 0 10px;
-    background: @background;
-    color: @foreground;
+    padding: 5px;
+    color: @overlay0;
+    margin-right: 5px;
 }
-#workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-    background-image: linear-gradient(0deg, @selection, @background-darker);
-}
-#workspaces button.focused,
+
 #workspaces button.active {
-    background-image: linear-gradient(0deg, @purple, @selection);
+    color: @mauve;
 }
+
+#workspaces button.focused {
+    color: @text;
+    background: @green;
+    border-radius: 10px;
+}
+
 #workspaces button.urgent {
-    background-image: linear-gradient(0deg, @red, @background-darker);
+    color: @mantle;
+    background: @red;
+    border-radius: 10px;
 }
-#taskbar button.active {
-    background-image: linear-gradient(0deg, @selection, @background-darker);
+
+#workspaces button:hover {
+    color: @base;
+    background: @mauve;
+    border-radius: 10px;
 }
-#clock {
-    padding: 0 4px;
-    background: @background;
+
+#mpris,
+#window,
+#clock,
+#custom-notification,
+#battery,
+#pulseaudio,
+#network,
+#workspaces,
+#tray {
+    padding: 0px 10px;
+    margin: 3px 0px;
+    margin-top: 10px;
+}
+
+#mpris,
+#pulseaudio,
+#clock,
+#custom-notification {
+    color: @text;
+    background: @base;
+    border: 1px solid @base;
+}
+
+#tray {
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+#workspaces {
+    background: @base;
+    border-radius: 10px;
+    margin-left: 10px;
+    padding-right: 0px;
+    padding-left: 5px;
+    border: 1px solid @base;
+}
+
+#pulseaudio {
+    border-radius: 10px 0px 0px 10px;
+    border-left: 0px;
+    border-right: 0px;
+    min-width: 5px;
+}
+
+#window {
+    color: @green;
+    background: @base;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 60px;
+}
+
+window#waybar.empty  #window{
+    border: 0px;
+    margin: 0Px;
+    padding: 0px;
+    background-color: transparent;
+}
+
+#custom-notification {
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 10px;
+    border-right: 0px;
 }
