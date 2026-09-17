@@ -7,6 +7,9 @@ base-devel
 debugedit
 git
 neovim
+bluez
+bluez-utils
+zsh
 # hyprland
 kitty
 wl-clipboard
@@ -26,3 +29,4 @@ qt5ct
 qt6-base
 qt6ct
 kvantum
+
