@@ -54,6 +54,7 @@ hl.config({
     misc = {
         force_default_wallpaper = -1,
         disable_hyprland_logo   = false,
+        focus_on_activate = false,
     },
 })
 
@@ -212,6 +213,12 @@ hl.window_rule({
     match = { class = "hyprland-run" },
     move  = "20 monitor_h-120",
     float = true,
+})
+
+-- dunst notifications
+hl.window_rule({
+    match = { class = "dunst" },
+    no_initial_focus = 1
 })
 
 -- wow

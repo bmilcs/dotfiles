@@ -8,7 +8,7 @@
 [[ $- != *i* ]] && return
 
 # set locale all
-export LC_ALL=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
 bind 'set completion-ignore-case on'
 
 # terminal prompt style
@@ -22,7 +22,7 @@ source $HOME/.scripts/.global_variables
 #
 
 # system & app updates
-alias up='sudo pacman -Syu'
+alias up='cfg pull && sudo pacman -Syu --noconfirm'
 alias rb='reboot'
 alias sd='shutdown -h now'
 
